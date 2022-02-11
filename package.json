@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@notionhq/client": "^0.4.13",
+    "dotenv": "^16.0.0",
+    "node-fetch": "^2.0.0",
+    "notion": "^0.0.1"
+  }
+}
