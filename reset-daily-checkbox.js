@@ -1,7 +1,6 @@
 const { Client } = require("@notionhq/client");
 const fetch = require("node-fetch");
 require("dotenv").config();
-// TODO remove token from code, use environment variables
 
 const TOKEN = process.env.INTEGRATION_SECRET;
 const notion = new Client({
@@ -12,6 +11,7 @@ const databaseId = process.env.DBID;
 (async () => {
   const response = await notion.databases.query({
     database_id: databaseId,
+    // apply filters
     filter: {
       and: [
         {
@@ -53,7 +53,6 @@ const databaseId = process.env.DBID;
 
   // loop over pages
   pageIds.forEach(async (pageId) => {
-    let myProperties = response.results[0].properties;
     const options = {
       method: "PATCH",
       headers: {
@@ -77,9 +76,9 @@ const databaseId = process.env.DBID;
     };
 
     // update the page
-    fetch("https://api.notion.com/v1/pages/" + pageId + "", options)
-      .then((response) => response.json())
-      //.then((response) => console.log(response) {})
-      .catch((err) => console.error(err));
+    fetch("https://api.notion.com/v1/pages/" + pageId + "", options);
+      /*.then((response) => response.json())
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));*/
   });
 })();
